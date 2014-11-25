@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
      <Compile Include="Assets\Scripts\LinearFlight.cs" />
      <Compile Include="Assets\Scripts\Lives.cs" />
+     <Compile Include="Assets\Scripts\MapBoundary.cs" />
      <Compile Include="Assets\Scripts\Missile.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerCharacter.cs" />

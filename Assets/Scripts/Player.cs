@@ -128,13 +128,8 @@ public class Player : MonoBehaviour
     {
         if (shootingCooldown > shootingDelay)
         {
-            Vector3 pos = Input.mousePosition;
-            pos.z = transform.position.z - Camera.main.transform.position.z;
-            pos = Camera.main.ScreenToWorldPoint(pos);
-
-            Quaternion q = Quaternion.FromToRotation(Vector3.right, pos - transform.position);
-            GameObject newMissile = (GameObject)Instantiate(missilePrefab, transform.position, q);
-            newMissile.GetComponent<Missile>().FireWithOffset(characterOffset);
+            Vector3 missileDirection = head.position + head.forward * characterOffset;
+            GameObject newMissile = (GameObject)Instantiate(missilePrefab, missileDirection, head.rotation);
             shootingCooldown = 0;
         }
     }

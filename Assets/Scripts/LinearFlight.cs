@@ -13,7 +13,7 @@ public class LinearFlight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(flightDirection.normalized * speed * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
 
     public void IncrementSpeed()

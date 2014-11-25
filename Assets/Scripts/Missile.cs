@@ -10,9 +10,9 @@ public class Missile : MonoBehaviour {
     {
         if (offsetDistance > 0)
         {
-            transform.Translate(transform.right * offsetDistance);
+            transform.Translate(transform.forward * offsetDistance);
         }
-        gameObject.rigidbody.AddForce(transform.right * force);
+        gameObject.rigidbody.AddForce(transform.forward * force);
     }
 
     public void RotateFlightDirection(float deg)
