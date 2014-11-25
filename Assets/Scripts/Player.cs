@@ -12,9 +12,35 @@ public class Player : MonoBehaviour
 	float rotationX = 0;
 	float rotationY = 180f;
 
+    [SerializeField]
+    private float jetpackForce;
+    [SerializeField]
+    private float maxVelocity;
+    [SerializeField]
+    private float shootingDelay;
+    [SerializeField]
+    private GameObject missilePrefab;
+    [SerializeField]
+    private float characterOffset;
+    [SerializeField]
+    private Material grayscaleMaterial;
+    [SerializeField]
+    private Material redMaterial;
+
+    private float shootingCooldown;
+    private bool isControlsEnabled = true;
+    private Death playerDeath;
+    private Material originalMaterial;
+    
+
 	void Awake()
 	{
 		head = transform.Find("Head").transform;
+
+        //Small fix to allow player to shoot without waiting delay
+        shootingCooldown = shootingDelay;
+        playerDeath = gameObject.GetComponent<Death>();
+        originalMaterial = gameObject.GetComponentInChildren<MeshRenderer>().material;
 	}
 
 	void Update()
@@ -22,10 +48,17 @@ public class Player : MonoBehaviour
 		Screen.lockCursor = true;
 		UpdateRotation();
 		UpdateMovement();
-		if (transform.position.y < -1f)
-		{
-			transform.position = new Vector3(0, 1f, 0);
-		}
+
+        shootingCooldown += Time.deltaTime;
+        //RegulateVelocity();
+        if (isControlsEnabled)
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Debug.Log("FIRE");
+                FireMissile();
+            }
+        }
 	}
 	
 	void UpdateRotation()
@@ -43,11 +76,83 @@ public class Player : MonoBehaviour
 	void UpdateMovement()
 	{
 		float axisX = Input.GetAxis("Horizontal");
+        float axisY = Input.GetAxis("Lateral");
 		float axisZ = Input.GetAxis("Vertical");
 
-		var speed = new Vector3(0, rigidbody.velocity.y, 0);
-		speed += Quaternion.Euler(0, rotationY, 0) * Vector3.right * axisX * moveSpeed * Time.deltaTime;
-		speed += Quaternion.Euler(0, rotationY, 0) * Vector3.forward * axisZ * moveSpeed * Time.deltaTime;
-		rigidbody.AddForce(speed);
+        Vector3 playerMove = new Vector3(axisX, axisY, axisZ);
+        gameObject.transform.Translate(playerMove * moveSpeed * Time.deltaTime);
 	}
+
+    public void Kill()
+    {
+        playerDeath.Die();
+    }
+
+    public void DisableControls()
+    {
+        isControlsEnabled = false;
+    }
+
+    public void EnableControls()
+    {
+        isControlsEnabled = true;
+    }
+
+    public void DisableWrapAround()
+    {
+        gameObject.GetComponent<WrapAround>().enabled = false;
+    }
+
+    public void EnableWrapAround()
+    {
+        gameObject.GetComponent<WrapAround>().enabled = true;
+    }
+
+    public void DisableCollisions()
+    {
+        //gameObject.GetComponent<IgnoreCollision>().enabled = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public void EnableCollisions()
+    {
+        //gameObject.GetComponent<IgnoreCollision>().enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+    }
+
+    public void ApplyDeadMaterial()
+    {
+        gameObject.GetComponentInChildren<MeshRenderer>().material = redMaterial;
+    }
+
+    public void RemoveDeadMaterial()
+    {
+        gameObject.GetComponentInChildren<MeshRenderer>().material = grayscaleMaterial;
+    }
+
+    //Adapted from http://answers.unity3d.com/questions/9985/limiting-rigidbody-velocity.html
+    //private void RegulateVelocity()
+    //{
+    //    float currentVelocity = gameObject.rigidbody2D.velocity.sqrMagnitude;
+    //    //Debug.Log("Current velocity: " + currentVelocity);
+    //    if (currentVelocity > maxVelocity)
+    //    {
+    //        gameObject.rigidbody2D.velocity *= 0.80f;
+    //    }
+    //}
+
+    private void FireMissile()
+    {
+        if (shootingCooldown > shootingDelay)
+        {
+            Vector3 pos = Input.mousePosition;
+            pos.z = transform.position.z - Camera.main.transform.position.z;
+            pos = Camera.main.ScreenToWorldPoint(pos);
+
+            Quaternion q = Quaternion.FromToRotation(Vector3.right, pos - transform.position);
+            GameObject newMissile = (GameObject)Instantiate(missilePrefab, transform.position, q);
+            newMissile.GetComponent<Missile>().FireWithOffset(characterOffset);
+            shootingCooldown = 0;
+        }
+    }
 }
