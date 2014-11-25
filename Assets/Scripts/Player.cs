@@ -23,8 +23,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float characterOffset;
     [SerializeField]
-    private Material grayscaleMaterial;
-    [SerializeField]
     private Material redMaterial;
 
     private float shootingCooldown;
@@ -76,8 +74,8 @@ public class Player : MonoBehaviour
 	void UpdateMovement()
 	{
 		float axisX = Input.GetAxis("Horizontal");
-        float axisY = Input.GetAxis("Lateral");
-		float axisZ = Input.GetAxis("Vertical");
+        float axisY = Input.GetAxis("UpDown");
+        float axisZ = Input.GetAxis("FrontBack");
 
         Vector3 playerMove = new Vector3(axisX, axisY, axisZ);
         gameObject.transform.Translate(playerMove * moveSpeed * Time.deltaTime);
@@ -127,7 +125,7 @@ public class Player : MonoBehaviour
 
     public void RemoveDeadMaterial()
     {
-        gameObject.GetComponentInChildren<MeshRenderer>().material = grayscaleMaterial;
+        gameObject.GetComponentInChildren<MeshRenderer>().material = originalMaterial;
     }
 
     //Adapted from http://answers.unity3d.com/questions/9985/limiting-rigidbody-velocity.html

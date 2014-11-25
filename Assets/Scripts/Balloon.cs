@@ -26,7 +26,7 @@ public class Balloon : MonoBehaviour
         score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
         progress = GameObject.FindGameObjectWithTag("GameProgress").GetComponent<GameProgress>();
         Color newColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), 1f);
-        gameObject.GetComponentInChildren<SpriteRenderer>().color = newColor;
+        gameObject.GetComponentInChildren<MeshRenderer>().material.color = newColor;
     }
 
     // Update is called once per frame

@@ -3,3 +3,4 @@ Temp/
 UnityVS.KevinSilvaA3.sln
 UnityVS.KevinSilvaA3.CSharp.csproj
 Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Messaging.dll.meta
+obj/
