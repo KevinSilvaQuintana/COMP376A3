@@ -13,7 +13,7 @@ public class HotAirBalloon : MonoBehaviour
     [SerializeField]
     private float balloonOffset;
 
-    private PlayerCharacter player;
+    private Player player;
     private float shootingCooldown;
     private Score score;
 
@@ -22,7 +22,7 @@ public class HotAirBalloon : MonoBehaviour
     void Start()
     {
         shootingCooldown = shootingDelay;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
     }
 

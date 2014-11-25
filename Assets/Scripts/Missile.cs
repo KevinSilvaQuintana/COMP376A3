@@ -12,7 +12,7 @@ public class Missile : MonoBehaviour {
         {
             transform.Translate(transform.right * offsetDistance);
         }
-        gameObject.rigidbody2D.AddForce(transform.right * force);
+        gameObject.rigidbody.AddForce(transform.right * force);
     }
 
     public void RotateFlightDirection(float deg)

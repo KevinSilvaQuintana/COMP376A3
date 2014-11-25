@@ -4,18 +4,14 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
 	public float maxRangeMouseY = 45f;
-	public float turnSpeed = 200f;
-	public float moveSpeed = 200f;
+	public float turnSpeed = 5f;
+	public float moveSpeed = 5f;
 
 	Transform head;
 
 	float rotationX = 0;
 	float rotationY = 180f;
 
-    [SerializeField]
-    private float jetpackForce;
-    [SerializeField]
-    private float maxVelocity;
     [SerializeField]
     private float shootingDelay;
     [SerializeField]
@@ -127,17 +123,6 @@ public class Player : MonoBehaviour
     {
         gameObject.GetComponentInChildren<MeshRenderer>().material = originalMaterial;
     }
-
-    //Adapted from http://answers.unity3d.com/questions/9985/limiting-rigidbody-velocity.html
-    //private void RegulateVelocity()
-    //{
-    //    float currentVelocity = gameObject.rigidbody2D.velocity.sqrMagnitude;
-    //    //Debug.Log("Current velocity: " + currentVelocity);
-    //    if (currentVelocity > maxVelocity)
-    //    {
-    //        gameObject.rigidbody2D.velocity *= 0.80f;
-    //    }
-    //}
 
     private void FireMissile()
     {
