@@ -12,7 +12,6 @@ public class WaterBalloon : MonoBehaviour {
     void OnCollisionEnter(Collision col)
     {
         GameObject collidingObject = col.gameObject;
-        Debug.Log("WaterBalloon OnCollisionEnter" + collidingObject);
         if (collidingObject.tag == "Missile")
         {
             // Destroy the missile

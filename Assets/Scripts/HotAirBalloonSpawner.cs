@@ -16,16 +16,14 @@ public class HotAirBalloonSpawner : MonoBehaviour
 
     public void DeployHotAirBalloon(bool isSpawnFromRight, bool isSpeedUpEnabled)
     {
-        Debug.Log("DeployHotAirBalloon!!!!");
         float spawnX = isSpawnFromRight ? -boxSize.x / 2 : boxSize.x / 2;
         float spawnY = UnityEngine.Random.Range(-boxSize.y / 2, boxSize.y / 2);
         float spawnZ = UnityEngine.Random.Range(-boxSize.z / 2, boxSize.z / 2);
 
         Vector3 spawnPosition = new Vector3(spawnX, spawnY, spawnZ);
-        Debug.Log("spawnPosition: " + spawnPosition);
 
         GameObject hotAirBalloon = Instantiate(hotAirBalloonPrefab, spawnPosition, Quaternion.identity) as GameObject;
-        hotAirBalloon.name = "hotAirBalloon";
+        hotAirBalloon.name = "Hot Air Balloon";
         
         LinearFlight linearFlight = hotAirBalloon.GetComponent<LinearFlight>();
         if (isSpawnFromRight)

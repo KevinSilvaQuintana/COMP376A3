@@ -10,7 +10,7 @@ public class GameProgress : MonoBehaviour {
     private HotAirBalloonSpawner hotAirBallonSpawner;
 
     private readonly int BALLOONS_PER_CLUSTER = 15;
-    private readonly int HOT_AIR_BALLOON_PROGRESS_1 = 1;
+    private readonly int HOT_AIR_BALLOON_PROGRESS_1 = 30;
     private readonly int HOT_AIR_BALLOON_PROGRESS_2 = 60;
     private readonly int HOT_AIR_BALLOON_PROGRESS_3 = 90;
     private readonly int INCREASED_SPEED_PROGRESS = 80;
@@ -23,7 +23,7 @@ public class GameProgress : MonoBehaviour {
     bool increasedSpeedDeployed = false;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
         BalloonSpawner balloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawner>();
         hotAirBallonSpawner = GameObject.FindGameObjectWithTag("HotAirBalloonSpawner").GetComponent<HotAirBalloonSpawner>();
         progressText = gameObject.GetComponent<TextMesh>();
@@ -78,6 +78,7 @@ public class GameProgress : MonoBehaviour {
     {
         if (currentProgress > INCREASED_SPEED_PROGRESS && !increasedSpeedDeployed)
         {
+            Debug.Log("All Balloons Being Sped up! Be careful!");
             GameObject[] balloons = GameObject.FindGameObjectsWithTag("Balloon");
             foreach (GameObject b in balloons)
             {
