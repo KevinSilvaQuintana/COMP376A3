@@ -60,8 +60,20 @@ public class HotAirBalloon : MonoBehaviour
 
     private bool isOutOfScreen()
     {
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        return (screenPosition.x < -screenOffset || screenPosition.x > Screen.width + screenOffset);
+        Vector3 boxSize = GameObject.FindGameObjectWithTag("MapBoundary").transform.localScale;
+        if (transform.position.x > boxSize.x + screenOffset || transform.position.x < -boxSize.x - screenOffset)
+        {
+            return true;
+        }
+        if (transform.position.y > boxSize.y + screenOffset || transform.position.y < -boxSize.y - screenOffset)
+        {
+            return true;
+        }
+        if (transform.position.z > boxSize.z + screenOffset || transform.position.z < -boxSize.z - screenOffset)
+        {
+            return true;
+        }
+        return false;
     }
 
     private void ShootWaterBalloon()
@@ -71,10 +83,6 @@ public class HotAirBalloon : MonoBehaviour
         Quaternion q = Quaternion.FromToRotation(Vector3.up, playerDirection);
         GameObject waterBalloon = (GameObject)Instantiate(waterBalloonPrefab, transform.position, q);
         waterBalloon.name = "WaterBallooon";
-        LinearFlight linearFlight = waterBalloon.GetComponent<LinearFlight>();
-        linearFlight.flightDirection = playerDirection;
-        //Must rotate drops because they spawn upside down
-        waterBalloon.transform.Rotate(new Vector3(1, 0, 0), 180f);
-        
+        waterBalloon.transform.forward = playerDirection;        
     }
 }

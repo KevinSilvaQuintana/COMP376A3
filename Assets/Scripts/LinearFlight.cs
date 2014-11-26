@@ -7,8 +7,6 @@ public class LinearFlight : MonoBehaviour
     public float speed;
     [SerializeField]
     public float speedIncrement;
-    [SerializeField]
-    public Vector3 flightDirection;
 
     // Update is called once per frame
     void Update()

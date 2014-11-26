@@ -16,9 +16,10 @@ public class HotAirBalloonSpawner : MonoBehaviour
 
     public void DeployHotAirBalloon(bool isSpawnFromRight, bool isSpeedUpEnabled)
     {
+        Debug.Log("DeployHotAirBalloon!!!!");
         float spawnX = isSpawnFromRight ? -boxSize.x / 2 : boxSize.x / 2;
         float spawnY = UnityEngine.Random.Range(-boxSize.y / 2, boxSize.y / 2);
-        float spawnZ = boxSize.z / 2;
+        float spawnZ = UnityEngine.Random.Range(-boxSize.z / 2, boxSize.z / 2);
 
         Vector3 spawnPosition = new Vector3(spawnX, spawnY, spawnZ);
         Debug.Log("spawnPosition: " + spawnPosition);
@@ -29,11 +30,11 @@ public class HotAirBalloonSpawner : MonoBehaviour
         LinearFlight linearFlight = hotAirBalloon.GetComponent<LinearFlight>();
         if (isSpawnFromRight)
         {
-            hotAirBalloon.transform.forward = new Vector3(-1, 0, 0);
+            hotAirBalloon.transform.forward = new Vector3(1, 0, 0);
         }
         else
         {
-            hotAirBalloon.transform.forward = new Vector3(1, 0, 0);
+            hotAirBalloon.transform.forward = new Vector3(-1, 0, 0);
         }
         if (isSpeedUpEnabled)
         {
