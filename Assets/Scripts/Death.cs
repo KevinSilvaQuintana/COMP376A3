@@ -61,6 +61,10 @@ public class Death : MonoBehaviour
             player.DisableControls();
             player.DisableWrapAround();
             player.DisableCollisions();
+            player.ApplyDeadMaterial();
+
+            player.gameObject.rigidbody.useGravity = true;
+            player.gameObject.rigidbody.isKinematic = false;
             
             if (lives.IsGameOver())
             {
@@ -79,6 +83,8 @@ public class Death : MonoBehaviour
         player.EnableControls();
         player.EnableWrapAround();
         player.EnableCollisions();
-        player.ApplyDeadMaterial();
+
+        player.gameObject.rigidbody.useGravity = false;
+        player.gameObject.rigidbody.isKinematic = true;
     }
 }

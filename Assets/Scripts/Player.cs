@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float characterOffset;
     [SerializeField]
-    private Material redMaterial;
+    private Material deadMaterial;
 
     private float shootingCooldown;
     private bool isControlsEnabled = true;
@@ -40,13 +40,12 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		Screen.lockCursor = true;
-		UpdateRotation();
-		UpdateMovement();
 
         shootingCooldown += Time.deltaTime;
-        //RegulateVelocity();
         if (isControlsEnabled)
         {
+            UpdateRotation();
+            UpdateMovement();
             if (Input.GetButtonDown("Fire1"))
             {
                 FireMissile();
@@ -115,12 +114,20 @@ public class Player : MonoBehaviour
 
     public void ApplyDeadMaterial()
     {
-        gameObject.GetComponentInChildren<MeshRenderer>().material = redMaterial;
+        MeshRenderer[] meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer m in meshRenderers)
+        {
+            m.material = deadMaterial;
+        }
     }
 
     public void RemoveDeadMaterial()
     {
-        gameObject.GetComponentInChildren<MeshRenderer>().material = originalMaterial;
+        MeshRenderer[] meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer m in meshRenderers)
+        {
+            m.material = originalMaterial;
+        }
     }
 
     private void FireMissile()
