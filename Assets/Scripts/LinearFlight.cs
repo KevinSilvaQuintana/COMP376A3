@@ -28,7 +28,6 @@ public class LinearFlight : MonoBehaviour
 
     public void rotateRamdonly(float maxDegree)
     {
-        Debug.Log("Rotate!");
         Quaternion q = CreateRotationWithMaxDegree(maxDegree);
         transform.forward = q * transform.forward;
     }

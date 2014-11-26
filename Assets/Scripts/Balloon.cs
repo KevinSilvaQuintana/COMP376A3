@@ -34,7 +34,6 @@ public class Balloon : MonoBehaviour
         GameObject collidingObject = col.gameObject;
         if (collidingObject.tag == "Missile")
         {
-            Debug.Log("POP!");
             // Destroy the missile
             Destroy(collidingObject);
             Pop();

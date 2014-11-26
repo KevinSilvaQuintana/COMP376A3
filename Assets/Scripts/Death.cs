@@ -14,8 +14,8 @@ public class Death : MonoBehaviour
     public bool isReviving = true;
 
     private float currentTimer;
-    public float revivingTimer = 0f;
-    public float dyingTimer = 0f;
+    private float revivingTimer = 0f;
+    private float dyingTimer = 0f;
 
     void Start()
     {

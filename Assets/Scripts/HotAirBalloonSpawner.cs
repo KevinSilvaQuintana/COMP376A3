@@ -4,29 +4,36 @@ using System.Collections;
 public class HotAirBalloonSpawner : MonoBehaviour
 {
 
-    public float spawnOffsetY;
-
     [SerializeField]
     private GameObject hotAirBalloonPrefab;
     private readonly float SPEED_UP_FACTOR = 1.3f;
+    private Vector3 boxSize;
+
+    void Start()
+    {
+        boxSize = GameObject.FindGameObjectWithTag("MapBoundary").transform.localScale;
+    }
 
     public void DeployHotAirBalloon(bool isSpawnFromRight, bool isSpeedUpEnabled)
     {
-        float spawnY = UnityEngine.Random.Range(spawnOffsetY, Screen.height - spawnOffsetY);
-        int spawnX = isSpawnFromRight ? Screen.width : 0;
+        float spawnX = isSpawnFromRight ? -boxSize.x / 2 : boxSize.x / 2;
+        float spawnY = UnityEngine.Random.Range(-boxSize.y / 2, boxSize.y / 2);
+        float spawnZ = boxSize.z / 2;
 
-        Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(new Vector3(spawnX, spawnY, 10));
+        Vector3 spawnPosition = new Vector3(spawnX, spawnY, spawnZ);
+        Debug.Log("spawnPosition: " + spawnPosition);
 
         GameObject hotAirBalloon = Instantiate(hotAirBalloonPrefab, spawnPosition, Quaternion.identity) as GameObject;
         hotAirBalloon.name = "hotAirBalloon";
+        
         LinearFlight linearFlight = hotAirBalloon.GetComponent<LinearFlight>();
         if (isSpawnFromRight)
         {
-            linearFlight.flightDirection = new Vector3(-1, 0, 0);
+            hotAirBalloon.transform.forward = new Vector3(-1, 0, 0);
         }
         else
         {
-            linearFlight.flightDirection = new Vector3(1, 0, 0);
+            hotAirBalloon.transform.forward = new Vector3(1, 0, 0);
         }
         if (isSpeedUpEnabled)
         {
