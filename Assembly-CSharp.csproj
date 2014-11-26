@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\Timeout.cs" />
      <Compile Include="Assets\Scripts\WaterBalloon.cs" />
      <Compile Include="Assets\Scripts\WrapAround.cs" />
+     <None Include="Assets\Shaders\TransparentShader.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

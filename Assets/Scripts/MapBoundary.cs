@@ -8,12 +8,11 @@ public class MapBoundary : MonoBehaviour {
         WrapAround wrapAround = collider.gameObject.GetComponent<WrapAround>();
         if (wrapAround != null)
         {
-            Debug.Log("SUCCESS!");
             wrapAround.ScreenWrap();
         }
         else
         {
-            Debug.Log("FAILED!");
+            Debug.Log("Nothing to Wrap!");
         }
     }
 }
