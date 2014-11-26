@@ -8,7 +8,7 @@ public class Death : MonoBehaviour
     [SerializeField]
     private float reviveCooldown;
 
-    private PlayerCharacter player;
+    private Player player;
     private Lives lives;
     public bool isDying = false;
     public bool isReviving = true;
@@ -19,7 +19,7 @@ public class Death : MonoBehaviour
 
     void Start()
     {
-        player = gameObject.GetComponent<PlayerCharacter>();
+        player = gameObject.GetComponent<Player>();
         lives = GameObject.FindGameObjectWithTag("Lives").GetComponent<Lives>();
     }
 
@@ -46,7 +46,7 @@ public class Death : MonoBehaviour
             revivingTimer = 0f;
             isReviving = false;
             isDying = false;
-            player.RemoveColor();
+            player.RemoveDeadMaterial();
             
         }
 
@@ -79,6 +79,6 @@ public class Death : MonoBehaviour
         player.EnableControls();
         player.EnableWrapAround();
         player.EnableCollisions();
-        player.ApplyColor();
+        player.ApplyDeadMaterial();
     }
 }

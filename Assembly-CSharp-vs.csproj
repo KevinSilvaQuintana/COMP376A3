@@ -48,7 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Balloon.cs" />
      <Compile Include="Assets\Scripts\BalloonSpawner.cs" />
-     <Compile Include="Assets\Scripts\CameraWall.cs" />
      <Compile Include="Assets\Scripts\ContinueGame.cs" />
      <Compile Include="Assets\Scripts\Death.cs" />
      <Compile Include="Assets\Scripts\ExitGame.cs" />
@@ -61,7 +60,6 @@
      <Compile Include="Assets\Scripts\MapBoundary.cs" />
      <Compile Include="Assets\Scripts\Missile.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
-     <Compile Include="Assets\Scripts\PlayerCharacter.cs" />
      <Compile Include="Assets\Scripts\Score.cs" />
      <Compile Include="Assets\Scripts\Timeout.cs" />
      <Compile Include="Assets\Scripts\WaterBalloon.cs" />

@@ -3,26 +3,20 @@ using System.Collections;
 
 public class Balloon : MonoBehaviour
 {
-    public float initialSpeed;
     public Balloon balloonPrefab;
     public float sizeDecrement;
     public bool isAlive;
     public int balloonsInCluster;
-    public float splitCooldown;
 
-    //private int balloonsInCluster;
-    private Vector3 direction;
-    private PlayerCharacter player;
+    private Player player;
     private Score score;
     private GameProgress progress;
-
-    private float splitTimer = 0f;
 
     // Use this for initialization
     void Start()
     {
         isAlive = true;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
         progress = GameObject.FindGameObjectWithTag("GameProgress").GetComponent<GameProgress>();
         Color newColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), 1f);
@@ -32,18 +26,15 @@ public class Balloon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        splitTimer += Time.deltaTime;
-        if (splitTimer > splitCooldown)
-        {
-            Pop();
-        }
+
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionEnter(Collision col)
     {
         GameObject collidingObject = col.gameObject;
         if (collidingObject.tag == "Missile")
         {
+            Debug.Log("POP!");
             // Destroy the missile
             Destroy(collidingObject);
             Pop();
@@ -63,8 +54,8 @@ public class Balloon : MonoBehaviour
         }
         else
         {
-            CreateNewBalloon(Random.Range(0f, 180.0f));
-            CreateNewBalloon(Random.Range(0f, -180.0f));
+            CreateNewBalloon();
+            CreateNewBalloon();
             Die();
             score.AddScoreSplitBalloon();
         }
@@ -77,7 +68,7 @@ public class Balloon : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void CreateNewBalloon(float rotationDegrees)
+    private void CreateNewBalloon()
     {
         Balloon newBalloon = (Balloon)Instantiate(balloonPrefab, transform.position, Quaternion.identity);
         newBalloon.name = "BalloonPrefab";
@@ -85,14 +76,6 @@ public class Balloon : MonoBehaviour
         newBalloon.balloonsInCluster = this.balloonsInCluster / 2;
         LinearFlight flight = newBalloon.GetComponent<LinearFlight>();
         flight.IncrementSpeed();
-        flight.RotateFlightDirection(rotationDegrees);
-    }
-
-    public void ReverseDirection()
-    {
-        Vector3 direction = gameObject.GetComponent<LinearFlight>().flightDirection;
-        Debug.Log("before" + direction);
-        gameObject.GetComponent<LinearFlight>().flightDirection = -direction;
-        Debug.Log("after" + direction);
+        flight.rotateRamdonly(180f);
     }
 }

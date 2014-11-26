@@ -43,7 +43,7 @@ public class HotAirBalloon : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Missile")
         {

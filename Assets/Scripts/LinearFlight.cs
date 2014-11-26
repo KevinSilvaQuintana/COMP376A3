@@ -26,9 +26,17 @@ public class LinearFlight : MonoBehaviour
         speed *= factor;
     }
 
-    public void RotateFlightDirection(float deg)
+    public void rotateRamdonly(float maxDegree)
     {
-        Quaternion q = Quaternion.AngleAxis(deg, Vector3.forward);
-        flightDirection = q * flightDirection;
+        Debug.Log("Rotate!");
+        Quaternion q = CreateRotationWithMaxDegree(maxDegree);
+        transform.forward = q * transform.forward;
+    }
+
+    private Quaternion CreateRotationWithMaxDegree(float maxDegree)
+    {
+        Vector3 rotationAxis = new Vector3(Random.value, Random.value, Random.value).normalized;
+        float degree = Random.Range(0f, maxDegree);
+        return Quaternion.AngleAxis(degree, rotationAxis);
     }
 }

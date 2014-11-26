@@ -14,10 +14,10 @@ public class IgnoreCollision : MonoBehaviour
             GameObject[] objectsToignore = GameObject.FindGameObjectsWithTag(s);
             foreach (GameObject obj in objectsToignore)
             {
-                Collider2D otherCollider = obj.GetComponentInChildren<Collider2D>();
-                Collider2D thisCollider = gameObject.GetComponentInChildren<Collider2D>();
+                Collider otherCollider = obj.GetComponentInChildren<Collider>();
+                Collider thisCollider = gameObject.GetComponentInChildren<Collider>();
 
-                Physics2D.IgnoreCollision(thisCollider, otherCollider);
+                Physics.IgnoreCollision(thisCollider, otherCollider);
             }
         }     
 	}

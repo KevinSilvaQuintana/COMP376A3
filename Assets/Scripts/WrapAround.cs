@@ -14,9 +14,6 @@ public class WrapAround : MonoBehaviour
 
     public void ScreenWrap()
     {
-        //Vector3 translationWrap = transform.position - 2 * (transform.position - mapBoxCollider.center);
-        Debug.Log("Before: " + transform.position);
         transform.position = -transform.position;
-        Debug.Log("After: " + transform.position);
     }
 }

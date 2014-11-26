@@ -104,13 +104,13 @@ public class Player : MonoBehaviour
     public void DisableCollisions()
     {
         //gameObject.GetComponent<IgnoreCollision>().enabled = false;
-        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 
     public void EnableCollisions()
     {
         //gameObject.GetComponent<IgnoreCollision>().enabled = true;
-        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 
     public void ApplyDeadMaterial()
@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
         if (shootingCooldown > shootingDelay)
         {
             Vector3 missileDirection = head.position + head.forward * characterOffset;
-            GameObject newMissile = (GameObject)Instantiate(missilePrefab, missileDirection, head.rotation);
+            Instantiate(missilePrefab, missileDirection, head.rotation);
             shootingCooldown = 0;
         }
     }

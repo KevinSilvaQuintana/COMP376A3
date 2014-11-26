@@ -3,16 +3,16 @@ using System.Collections;
 
 public class WaterBalloon : MonoBehaviour {
 
-    private PlayerCharacter player;
+    private Player player;
 
 	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 	}
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionEnter(Collision col)
     {
         GameObject collidingObject = col.gameObject;
-        Debug.Log("WaterBalloon OnTriggerEnter2D" + collidingObject);
+        Debug.Log("WaterBalloon OnCollisionEnter" + collidingObject);
         if (collidingObject.tag == "Missile")
         {
             // Destroy the missile

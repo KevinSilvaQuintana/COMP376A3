@@ -27,7 +27,7 @@ public class BalloonSpawner : MonoBehaviour
             Balloon balloonCluster = (Balloon)Instantiate(balloonPrefab, worldPos, Quaternion.identity);
             balloonCluster.name = "BalloonCluster";
             LinearFlight flight = balloonCluster.GetComponent<LinearFlight>();
-            flight.RotateFlightDirection(UnityEngine.Random.Range(0f, 360f));
+            flight.rotateRamdonly(UnityEngine.Random.Range(0f, 360f));
 
             balloonClusters.Add(balloonCluster);
         }
