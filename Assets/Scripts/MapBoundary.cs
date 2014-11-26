@@ -3,13 +3,17 @@ using System.Collections;
 
 public class MapBoundary : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void OnTriggerExit(Collider collider)
+    {
+        WrapAround wrapAround = collider.gameObject.GetComponent<WrapAround>();
+        if (wrapAround != null)
+        {
+            Debug.Log("SUCCESS!");
+            wrapAround.ScreenWrap();
+        }
+        else
+        {
+            Debug.Log("FAILED!");
+        }
+    }
 }
