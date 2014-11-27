@@ -10,7 +10,7 @@ public class GameProgress : MonoBehaviour {
     private HotAirBalloonSpawner hotAirBallonSpawner;
 
     private readonly int BALLOONS_PER_CLUSTER = 15;
-    private readonly int HOT_AIR_BALLOON_PROGRESS_1 = 30;
+    private readonly int HOT_AIR_BALLOON_PROGRESS_1 = 10;
     private readonly int HOT_AIR_BALLOON_PROGRESS_2 = 60;
     private readonly int HOT_AIR_BALLOON_PROGRESS_3 = 90;
     private readonly int INCREASED_SPEED_PROGRESS = 80;

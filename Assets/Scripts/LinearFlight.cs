@@ -8,15 +8,22 @@ public class LinearFlight : MonoBehaviour
     [SerializeField]
     public float speedIncrement;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+        rigidbody.velocity = transform.forward * speed;
     }
+
+    // Update is called once per frame
+    //void Update()
+    //{
+    //    transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+    //}
 
     public void IncrementSpeed()
     {
-        speed += speedIncrement;
+        speed = rigidbody.velocity.magnitude + speedIncrement;
+        rigidbody.velocity = rigidbody.velocity.normalized * speed;
+        //speed += speedIncrement;
     }
 
     public void AdjustSpeedByMultiplicativeFactor(float factor)

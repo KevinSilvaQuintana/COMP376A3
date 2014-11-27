@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 	public float maxRangeMouseY = 45f;
 	public float turnSpeed = 5f;
 	public float moveSpeed = 5f;
+    public float trajectoryOffset;
 
 	Transform head;
 
@@ -135,7 +136,10 @@ public class Player : MonoBehaviour
         if (shootingCooldown > shootingDelay)
         {
             Vector3 missileDirection = head.position + head.forward * characterOffset;
-            Instantiate(missilePrefab, missileDirection, head.rotation);
+            GameObject missile = (GameObject)Instantiate(missilePrefab, missileDirection, head.rotation);
+
+            Quaternion upTrajectory = Quaternion.AngleAxis(30, new Vector3(-1, 0, 0));
+            missile.transform.rotation = missile.transform.rotation * upTrajectory;
             shootingCooldown = 0;
         }
     }
